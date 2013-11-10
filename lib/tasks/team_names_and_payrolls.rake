@@ -24,9 +24,8 @@ namespace :team_names_and_payrolls do
         end
 
         team = Team.create(name: team_name, payroll: team_payroll)
-
-    end
   end
+end
 end
 
 

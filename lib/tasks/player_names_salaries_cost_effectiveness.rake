@@ -17,14 +17,12 @@ namespace :player_names_salaries_cost_effectiveness do
     noko += 1
     puts player_name
     puts player_salary
-
-    player = Player.create(name: player_name, salary: player_salary, team_id: Team.find_by_name("Red Sox")) 
+    player = Player.create(name: player_name, salary: player_salary)
   end
-
-
 end
 
 end
+
 
 
 
