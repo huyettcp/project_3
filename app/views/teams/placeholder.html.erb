@@ -1,0 +1,51 @@
+<!--     d3.select("svg").selectAll("rect")
+      .data(sorted_team_payrolls)
+      .enter()
+      .append("div")
+      .attr("class", "bar")
+      .style("height", function(d) {
+      var barHeight = d * .000001;
+        return barHeight + "px";
+    })
+
+    d3.select("#data2")
+      .on("click", function() {
+        console.log("work")
+        console.log(team_cost_per_win)
+        alert('up')
+
+        d3.select("svg").selectAll("div")
+        .data(team_cost_per_win)
+        .enter()
+        .attr("class", "bar")
+
+      })
+
+      //   .data(team_cost_per_win)
+      //   .enter()
+      //   .append("div")
+      //   .attr("class", "bar")
+      //   .style("height", function(d) {
+      //   var barHeight = d * .000001;
+      //     return barHeight + "px";
+      // })
+      
+
+
+  })
+
+
+
+
+// var dataset = [ 5, 10, 15, 20, 25 ];
+
+
+
+// d3.select("body").selectAll("div")
+//  .data(dataset)
+//  .enter()
+//  .append("div")
+//  .attr("class", "bar")
+//  .style("height", function(d) {
+//   var barHeight = d * 5;
+//   return barHeigh -->

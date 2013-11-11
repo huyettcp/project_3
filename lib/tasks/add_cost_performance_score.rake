@@ -11,7 +11,7 @@ namespace :add_cost_performance_score do
 
   while player_name != ''
     player_name = n.css(".rightcol").css("tr").css("td").css("a")[noko].text
-    cost_performance_score = n.css(".rightcol").css("tr").css("td").css(".extrabig")[noko].text.gsub("$", "").gsub(",","").to_i
+    cost_performance_score = n.css(".rightcol").css("tr").css("td").css(".extrabig")[noko].text.gsub("$", "").gsub(",","").to_f
     noko += 1
     puts player_name
     puts cost_performance_score

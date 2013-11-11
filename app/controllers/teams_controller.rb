@@ -1,6 +1,6 @@
 class TeamsController < ApplicationController
   def index 
-    @teams = Team.all
+    @teams = Team.order("payroll DESC")
     respond_to do |format|
       format.html
       format.json {render :json => @teams}

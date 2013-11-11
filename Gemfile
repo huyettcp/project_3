@@ -35,6 +35,9 @@ group :test do
 
 end
 
+gem "d3-rails"
+
+gem 'underscore-rails'
 
 
 # To use ActiveModel has_secure_password

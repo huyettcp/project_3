@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>D3 Visualization</title>
+</head>
+<body>
+  <div id="d3-me"></div>
+  <!DOCTYPE html>
+<meta charset="utf-8">
+
+<body>
+
+
+
+
+  <div id="demo">
+    <div id="buttons">
+      <button id="data1">Team Payroll</button>
+      <button id="data2">Team Performance</button>
+    </div>
+
+    </div>
+
+
+
+<style type="text/css">
+ div.bar {
+ display: inline-block;
+ width: 20px;
+ height: 75px; /* We'll override height later */
+ background-color: teal;
+ margin-right: 2px;
+}
+
+</style>
+
+<script>
+$(function(){
+  var svg = d3.select("body")
+    .append("svg")
+    // .attr("width", 1000)
+    // .attr("height", 300)
+  var w = 500;
+  var h = 100;
+  var barPadding = 1;
+  $.ajax({
+    url: '/teams',
+    method: 'GET',
+    dataType: 'json'
+  }).done(function(team){
+  
+    console.log(team[4].name)
+    console.log(team[4].cost_per_win)
+    
+
+    team_payrolls = []
+    _.each(team, function(t){
+      team_payrolls.push(t.payroll)
+    })
+
+    team_cost_per_win = []
+    _.each(team, function(t){
+      team_cost_per_win.push(t.cost_per_win)
+    })
+
+    // sorted_team_payrolls = team_payrolls.sort(d3.descending);
+    
+
+    console.log(team_payrolls);
+    svg.selectAll("rect")
+      .data(team_payrolls)
+      .enter()
+      .append("rect")
+      // .style("height", function(d) {
+      //   var barHeight = d * .000001;
+      //   return barHeight + "px";
+      //   })
+      .attr("x", function(d, i) {
+        return i * 21; //Bar width of 20 plus 1 for padding
+      })
+      // .attr("y", function(d){
+      //   return 300 - d;
+      // })
+      .attr("width", w / team_payrolls.length - barPadding)
+      .attr("height", function(d) {
+        return d * .000001; // <-- Times four!
+      })
+
+
+    d3.select("#data2").on("click",function() {
+      
+      
+      svg.selectAll("rect")
+      .data(team_cost_per_win)
+
+      .attr("x", function(d, i) {
+        return i * 21; //Bar width of 20 plus 1 for padding
+      })
+      .attr("width", 20)
+      .attr("height", function(d) {
+        return d * .0001; // <-- Times four!
+      
+
+      })
+
+
+      });
+    
+
+  })
+});
+    
+
+
+</script>
+
+
+</body>
+</html>
