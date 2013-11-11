@@ -23,6 +23,7 @@ namespace :least_efficient_teams do
 
         team = Team.find_by_name(team_name)
         team.update_attribute :cost_per_win, cost_per_win
+
     end
   end
 end

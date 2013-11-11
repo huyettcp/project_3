@@ -17,7 +17,10 @@ namespace :player_names_salaries_cost_effectiveness do
     noko += 1
     puts player_name
     puts player_salary
-    player = Player.create(name: player_name, salary: player_salary)
+
+    team_name = n.css("h2").text
+    team_id = Team.find_by_name(team_name)
+    player = Player.create(name: player_name, salary: player_salary, team_id: team_id.id)
   end
 end
 
