@@ -92,7 +92,7 @@ $(function(){
       
       svg.selectAll("rect")
       .data(team_cost_per_win)
-
+      .transition() 
       .attr("x", function(d, i) {
         return i * 21; //Bar width of 20 plus 1 for padding
       })

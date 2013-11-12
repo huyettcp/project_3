@@ -5,9 +5,9 @@ namespace :player_names_salaries_cost_effectiveness do
   require 'nokogiri'
   require 'open-uri'
 
-  Player.destroy_all
 
-  n = Nokogiri::HTML(open("http://baseballplayersalaries.com/teams/1_Boston_Red_Sox"))
+
+  n = Nokogiri::HTML(open("http://baseballplayersalaries.com/teams/12_Los_Angeles_Angels"))
   noko = 0
   player_name = nil
 

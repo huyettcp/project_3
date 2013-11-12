@@ -22,6 +22,7 @@
 
     </div>
     <script type="text/javascript">
+   $(function(){
    
    $.ajax({
     url: '/players',
@@ -49,17 +50,16 @@
             {"label":player[10].name, "value":player[10].salary * .00001}
             ];
 
-    other_data = [{"label":player[11].name, "value":player[11].salary * .00001},
-                  {"label":player[12].name, "value":player[12].salary * .00001}
+    other_data = [{"label":player[11].name, "value":parseFloat(player[11].cost_performance_score) * .00001}
                   ];
     
     var vis = d3.select("body")
-        .append("svg:svg")              //create the SVG element inside the <body>
+        .append("svg")              //create the SVG element inside the <body>
         .data([data])                   //associate our data with the document
-            .attr("width", w)           //set the width and height of our visualization (these will be attributes of the <svg> tag
-            .attr("height", h)
+        .attr("width", w)           //set the width and height of our visualization (these will be attributes of the <svg> tag
+        .attr("height", h)
         .append("svg:g")                //make a group to hold our pie chart
-            .attr("transform", "translate(" + r + "," + r + ")")    //move the center of the pie chart from 0, 0 to radius, radius
+        .attr("transform", "translate(" + r + "," + r + ")")    //move the center of the pie chart from 0, 0 to radius, radius
  
     var arc = d3.svg.arc()              //this will create <path> elements for us using arc data
         .outerRadius(r);
@@ -88,9 +88,59 @@
             .text(function(d, i) { return data[i].label; });        //get the label from our original data array
         
         d3.select("#data2").on("click", function(){
-        var vis = d3.select("body")
+        var vis = d3.select("svg")
+
+        .append("svg:svg") 
+               
+        .data([other_data]) 
+                          
+            .attr("width", w)           
+            .attr("height", h)
+        .append("svg:g")               
+            .attr("transform", "translate(" + r + "," + r + ")") 
+            
+ 
+        var arc = d3.svg.arc()            
+          .outerRadius(r);
+ 
+        var pie = d3.layout.pie()          
+          .value(function(d) { return d.value; });    
+ 
+        var arcs = vis.selectAll("g.slice")     
+          .data(pie) 
+      
+                                 
+          .enter()
+                                  
+          .append("svg:g") 
+                       
+          .attr("class", "slice");    
+ 
+        arcs.append("svg:path")
+          .attr("fill", function(d, i) { return color(i); } ) 
+          .attr("d", arc);                                    
+ 
+        arcs.append("svg:text")                                    
+          .attr("transform", function(d) {                    
+          d.innerRadius = 0;
+          d.outerRadius = r;
+          return "translate(" + arc.centroid(d) + ")";        
+          })
+          .attr("text-anchor", "middle")                          
+          .text(function(d, i) { return data[i].label; });   
+          })
+        });
+        d3.select("#data1").on("click", function(){
+        var w = 600,                        
+            h = 600,                            
+            r = 300,
+        color = d3.scale.category20c(); 
+
+
+        var vis = d3.select("svg")
         .append("svg:svg")            
-        .data([other_data])                  
+        .data([data])  
+
             .attr("width", w)           
             .attr("height", h)
         .append("svg:g")               
@@ -122,6 +172,7 @@
           .text(function(d, i) { return data[i].label; });   
           })
         });
+
         
     </script>
   </body>
