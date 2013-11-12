@@ -16,19 +16,21 @@
 
       <div id="demo">
     <div id="buttons">
-      <button id="data1">Team Payroll</button>
-      <button id="data2">Team Performance</button>
+      <button id="data1" onclick="salaryDataSet()">Team Payroll</button>
+      <button id="data2" onclick="costPerformanceScoreDataSet()">Team Performance</button>
     </div>
 
     </div>
     <script type="text/javascript">
-   $(function(){
    
+
+
+function onLoadSalaryDataSet(){
    $.ajax({
     url: '/players',
     method: 'GET',
     dataType: 'json'
-  }).done(function(team){
+  }).done(function(player){
 
     console.log(player[1].name)
 
@@ -37,7 +39,7 @@
     r = 300,                            //radius
     color = d3.scale.category20c();     //builtin range of colors
  
-    data = [{"label":player[0].name, "value":player[0].salary * .00001}, 
+    salary_data = [{"label":player[0].name, "value":player[0].salary * .00001}, 
             {"label":player[1].name, "value":player[1].salary * .00001},  
             {"label":player[2].name, "value":player[2].salary * .00001}, 
             {"label":player[3].name, "value":player[3].salary * .00001},
@@ -46,132 +48,178 @@
             {"label":player[6].name, "value":player[6].salary * .00001},
             {"label":player[7].name, "value":player[7].salary * .00001},
             {"label":player[8].name, "value":player[8].salary * .00001},
-            {"label":player[9].name, "value":player[9].salary * .00001},
-            {"label":player[10].name, "value":player[10].salary * .00001}
+            {"label":player[9].name, "value":player[9].salary * .00001}
             ];
 
-    other_data = [{"label":player[11].name, "value":parseFloat(player[11].cost_performance_score) * .00001}
+    
+    value_data = [{"label":player[0].name, "value":parseFloat(player[0].cost_performance_score) * .00001}
                   ];
     
     var vis = d3.select("body")
-        .append("svg")              //create the SVG element inside the <body>
-        .data([data])                   //associate our data with the document
-        .attr("width", w)           //set the width and height of our visualization (these will be attributes of the <svg> tag
+        .append("svg")              
+        .data([salary_data])                   
+        .attr("width", w)         
         .attr("height", h)
-        .append("svg:g")                //make a group to hold our pie chart
-        .attr("transform", "translate(" + r + "," + r + ")")    //move the center of the pie chart from 0, 0 to radius, radius
- 
-    var arc = d3.svg.arc()              //this will create <path> elements for us using arc data
+        .append("svg:g")                
+        .attr("transform", "translate(" + r + "," + r + ")")   
+    var arc = d3.svg.arc()              
         .outerRadius(r);
  
-    var pie = d3.layout.pie()           //this will create arc data for us given a list of values
-        .value(function(d) { return d.value; });    //we must tell it out to access the value of each element in our data array
+    var pie = d3.layout.pie()           
+        .value(function(d) { return d.value; });    
  
-    var arcs = vis.selectAll("g.slice")     //this selects all <g> elements with class slice (there aren't any yet)
-        .data(pie)                          //associate the generated pie data (an array of arcs, each having startAngle, endAngle and value properties) 
-        .enter()                            //this will create <g> elements for every "extra" data element that should be associated with a selection. The result is creating a <g> for every object in the data array
-            .append("svg:g")                //create a group to hold each slice (we will have a <path> and a <text> element associated with each slice)
-                .attr("class", "slice");    //allow us to style things in the slices (like text)
+    var arcs = vis.selectAll("g.slice")     
+        .data(pie)                          
+        .enter()                            
+            .append("svg:g")               
+                .attr("class", "slice");    
  
         arcs.append("svg:path")
-                .attr("fill", function(d, i) { return color(i); } ) //set the color for each slice to be chosen from the color function defined above
-                .attr("d", arc);                                    //this creates the actual SVG path using the associated data (pie) with the arc drawing function
+                .attr("fill", function(d, i) { return color(i); } ) 
+                .attr("d", arc);                                   
  
-        arcs.append("svg:text")                                     //add a label to each slice
-                .attr("transform", function(d) {                    //set the label's origin to the center of the arc
-                //we have to make sure to set these before calling arc.centroid
+        arcs.append("svg:text")                                   
+                .attr("transform", function(d) {                   
                 d.innerRadius = 0;
                 d.outerRadius = r;
-                return "translate(" + arc.centroid(d) + ")";        //this gives us a pair of coordinates like [50, 50]
+                return "translate(" + arc.centroid(d) + ")";        
             })
-            .attr("text-anchor", "middle")                          //center the text on it's origin
-            .text(function(d, i) { return data[i].label; });        //get the label from our original data array
-        
-        d3.select("#data2").on("click", function(){
-        var vis = d3.select("svg")
+            .attr("text-anchor", "middle")                          
+            .text(function(d, i) { return salary_data[i].label; });
+            })
+ }
 
-        .append("svg:svg") 
-               
-        .data([other_data]) 
-                          
-            .attr("width", w)           
-            .attr("height", h)
-        .append("svg:g")               
-            .attr("transform", "translate(" + r + "," + r + ")") 
-            
+ function costPerformanceScoreDataSet(){
+   $.ajax({
+    url: '/players_sorted',
+    method: 'GET',
+    dataType: 'json'
+  }).done(function(player){
+    console.log(player[0].name)
+
+    var w = 600,                        //width
+        h = 600,                            //height
+        r = 300,                            //radius
+    color = d3.scale.category20c(); 
+
+    value_data = [{"label":player[0].name, "value":parseFloat(player[0].cost_performance_score) * .00001},
+                  {"label":player[1].name, "value":parseFloat(player[1].cost_performance_score) * .00001},
+                  {"label":player[2].name, "value":parseFloat(player[2].cost_performance_score) * .00001},
+                  {"label":player[3].name, "value":parseFloat(player[3].cost_performance_score) * .00001},
+                  {"label":player[4].name, "value":parseFloat(player[4].cost_performance_score) * .00001},
+                  {"label":player[5].name, "value":parseFloat(player[5].cost_performance_score) * .00001},
+                  {"label":player[6].name, "value":parseFloat(player[6].cost_performance_score) * .00001},
+                  {"label":player[7].name, "value":parseFloat(player[7].cost_performance_score) * .00001},
+                  {"label":player[8].name, "value":parseFloat(player[8].cost_performance_score) * .00001},
+                  {"label":player[9].name, "value":parseFloat(player[9].cost_performance_score) * .00001}
+
+                  ];
+
+    var vis = d3.select("svg")
+        .append("svg")              
+        .data([value_data])                   
+        .attr("width", w)         
+        .attr("height", h)
+        .append("svg:g")                
+        .attr("transform", "translate(" + r + "," + r + ")")   
+    var arc = d3.svg.arc()              
+        .outerRadius(r);
  
-        var arc = d3.svg.arc()            
-          .outerRadius(r);
+    var pie = d3.layout.pie()           
+        .value(function(d) { return d.value; });    
  
-        var pie = d3.layout.pie()          
-          .value(function(d) { return d.value; });    
- 
-        var arcs = vis.selectAll("g.slice")     
-          .data(pie) 
-      
-                                 
-          .enter()
-                                  
-          .append("svg:g") 
-                       
-          .attr("class", "slice");    
+    var arcs = vis.selectAll("g.slice")     
+        .data(pie)                          
+        .enter()                            
+            .append("svg:g")               
+                .attr("class", "slice");    
  
         arcs.append("svg:path")
-          .attr("fill", function(d, i) { return color(i); } ) 
-          .attr("d", arc);                                    
+                .attr("fill", function(d, i) { return color(i); } ) 
+                .attr("d", arc);                                   
  
-        arcs.append("svg:text")                                    
-          .attr("transform", function(d) {                    
-          d.innerRadius = 0;
-          d.outerRadius = r;
-          return "translate(" + arc.centroid(d) + ")";        
-          })
-          .attr("text-anchor", "middle")                          
-          .text(function(d, i) { return data[i].label; });   
-          })
-        });
-        d3.select("#data1").on("click", function(){
-        var w = 600,                        
-            h = 600,                            
-            r = 300,
-        color = d3.scale.category20c(); 
+        arcs.append("svg:text")                                   
+                .attr("transform", function(d) {                   
+                d.innerRadius = 0;
+                d.outerRadius = r;
+                return "translate(" + arc.centroid(d) + ")";        
+            })
+            .attr("text-anchor", "middle")                          
+            .text(function(d, i) { return value_data[i].label; });
+            })
 
+}
 
-        var vis = d3.select("svg")
-        .append("svg:svg")            
-        .data([data])  
+function salaryDataSet(){
+   $.ajax({
+    url: '/players',
+    method: 'GET',
+    dataType: 'json'
+  }).done(function(player){
 
-            .attr("width", w)           
-            .attr("height", h)
-        .append("svg:g")               
-            .attr("transform", "translate(" + r + "," + r + ")")    
+    console.log(player[1].name)
+
+    var w = 600,                        //width
+    h = 600,                            //height
+    r = 300,                            //radius
+    color = d3.scale.category20c();     //builtin range of colors
  
-        var arc = d3.svg.arc()            
-          .outerRadius(r);
+    salary_data = [{"label":player[0].name, "value":player[0].salary * .00001}, 
+            {"label":player[1].name, "value":player[1].salary * .00001},  
+            {"label":player[2].name, "value":player[2].salary * .00001}, 
+            {"label":player[3].name, "value":player[3].salary * .00001},
+            {"label":player[4].name, "value":player[4].salary * .00001},
+            {"label":player[5].name, "value":player[5].salary * .00001},
+            {"label":player[6].name, "value":player[6].salary * .00001},
+            {"label":player[7].name, "value":player[7].salary * .00001},
+            {"label":player[8].name, "value":player[8].salary * .00001},
+            {"label":player[9].name, "value":player[9].salary * .00001}
+            ];
+
+    
+    value_data = [{"label":player[0].name, "value":parseFloat(player[0].cost_performance_score) * .00001}
+                  ];
+    
+    var vis = d3.select("svg")
+        .append("svg")              
+        .data([salary_data])                   
+        .attr("width", w)         
+        .attr("height", h)
+        .append("svg:g")                
+        .attr("transform", "translate(" + r + "," + r + ")")   
+    var arc = d3.svg.arc()              
+        .outerRadius(r);
  
-        var pie = d3.layout.pie()          
-          .value(function(d) { return d.value; });    
+    var pie = d3.layout.pie()           
+        .value(function(d) { return d.value; });    
  
-        var arcs = vis.selectAll("g.slice")     
-          .data(pie)                           
-          .enter()                            
-          .append("svg:g")               
-          .attr("class", "slice");    
+    var arcs = vis.selectAll("g.slice")     
+        .data(pie)                          
+        .enter()                            
+            .append("svg:g")               
+                .attr("class", "slice");    
  
         arcs.append("svg:path")
-          .attr("fill", function(d, i) { return color(i); } ) 
-          .attr("d", arc);                                    
+                .attr("fill", function(d, i) { return color(i); } ) 
+                .attr("d", arc);                                   
  
-        arcs.append("svg:text")                                    
-          .attr("transform", function(d) {                    
-          d.innerRadius = 0;
-          d.outerRadius = r;
-          return "translate(" + arc.centroid(d) + ")";        
-          })
-          .attr("text-anchor", "middle")                          
-          .text(function(d, i) { return data[i].label; });   
-          })
-        });
+        arcs.append("svg:text")                                   
+                .attr("transform", function(d) {                   
+                d.innerRadius = 0;
+                d.outerRadius = r;
+                return "translate(" + arc.centroid(d) + ")";        
+            })
+            .attr("text-anchor", "middle")                          
+            .text(function(d, i) { return salary_data[i].label; });
+            })
+ }
+
+
+
+window.onload=onLoadSalaryDataSet();
+
+
+</script>
 
         
     </script>
