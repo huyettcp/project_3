@@ -20,6 +20,16 @@
       <button id="data2">Team Performance</button>
     </div>
 
+    <div id="player_name">
+      No Name
+    </div>
+    <div id="salary_data">
+      Soon
+    </div>
+    <div id="cost_performance_score">
+      Soon
+    </div>
+
 <select id="team">
   <option value="349">Boston Red Sox</option>
   <option value="354">Los Angeles Angels of Anaheim</option>
@@ -33,12 +43,7 @@ $(document).ready(function(){
   $( '#team' ).on( 'change', function(){
     var team_id = $( '#team' ).val()
     salaryDataSet(team_id);
-
-
   })
-
-
-
 
   $( '#data2' ).click(function(){
     var team_id = $( '#team' ).val()
@@ -49,21 +54,21 @@ $(document).ready(function(){
     var team_id = $( '#team' ).val()
     salaryDataSet(team_id);
   })
-
-
-
 })
 
-
-
-// $( '#data2' ).click(function(){
-//   costPerformanceScoreDataSet(349);
-// })
-
-// $( '#data1' ).click(function(){
-//   salaryDataSet(349);
-// })
-
+function getPlayerInfo(name){
+  $.ajax({
+    url: '/player_data',
+    data: {name: name},
+    method: 'GET',
+    dataType: 'json'
+  }).done(function(name){
+    console.log(name[0].salary)
+    $( '#salary_data' ).text("2013 Salary: " + "$" + name[0].salary)
+    $( '#cost_performance_score' ).text("2013 Cost vs. Performance Score: " + name[0].cost_performance_score)
+  })
+ 
+}
 
 function onLoadSalaryDataSet(){
    $.ajax({
@@ -72,12 +77,11 @@ function onLoadSalaryDataSet(){
     dataType: 'json'
   }).done(function(player){
 
-    console.log(player[1].name)
 
-    var w = 600,                        //width
-    h = 600,                            //height
-    r = 300,                            //radius
-    color = d3.scale.category20c();     //builtin range of colors
+    var w = 600,                
+    h = 600,                          
+    r = 300,                            
+    color = d3.scale.category20c();      
  
     salary_data = [{"label":player[0].name, "value":player[0].salary * .00001}, 
             {"label":player[1].name, "value":player[1].salary * .00001},  
@@ -101,10 +105,6 @@ function onLoadSalaryDataSet(){
             {"label":player[19].name, "value":player[19].salary * .00001},
             {"label":player[20].name, "value":player[20].salary * .00001},
             ];
-
-    
-    value_data = [{"label":player[0].name, "value":parseFloat(player[0].cost_performance_score) * .00001}
-                  ];
     
     var vis = d3.select("body")
         .append("svg")              
@@ -123,7 +123,14 @@ function onLoadSalaryDataSet(){
         .data(pie)                          
         .enter()                            
             .append("svg:g")               
-                .attr("class", "slice");    
+                .attr("class", "slice")
+                .on("mouseover", function(e, i){
+                  // console.log(e, i)
+                  // console.log(e.data.label)
+                  var name = e.data.label
+                  $( '#player_name' ).text(e.data.label)
+                  // getPlayerInfo(player_name)
+                })    
  
         arcs.append("svg:path")
                 .attr("fill", function(d, i) { return color(i); } ) 
@@ -135,9 +142,13 @@ function onLoadSalaryDataSet(){
                 d.outerRadius = r;
                 return "translate(" + arc.centroid(d) + ")";        
             })
-            .attr("text-anchor", "middle")                          
+            .attr("class", "player_label")
+            .attr("display", "none")
+            .attr("text-anchor", "middle")
+
             .text(function(d, i) { return salary_data[i].label; });
             })
+
  }
 
 
@@ -196,7 +207,14 @@ function onLoadSalaryDataSet(){
         .data(pie)                          
         .enter()                            
             .append("svg:g")               
-                .attr("class", "slice");    
+                .attr("class", "slice")
+                .on("mouseover", function(e, i){
+                  // console.log(e, i)
+                  // console.log(e.data.label)
+                  var player_name = e.data.label
+                  $( '#player_name' ).text(e.data.label)
+                  // getPlayerInfo(player_name)
+                })     
  
         arcs.append("svg:path")
                 .attr("fill", function(d, i) { return color(i); } ) 
@@ -208,7 +226,9 @@ function onLoadSalaryDataSet(){
                 d.outerRadius = r;
                 return "translate(" + arc.centroid(d) + ")";        
             })
-            .attr("text-anchor", "middle")                          
+            .attr("class", "player_label")
+            .attr("display", "none")
+            .attr("text-anchor", "middle")                                                   
             .text(function(d, i) { return value_data[i].label; });
             })
 
@@ -272,7 +292,14 @@ function salaryDataSet(team_id){
         .data(pie)                          
         .enter()                            
             .append("svg:g")               
-                .attr("class", "slice");    
+                .attr("class", "slice")
+                .on("mouseover", function(e, i){
+                  // console.log(e, i)
+                  // console.log(e.data.label)
+                  var name = e.data.label
+                  $( '#player_name' ).text(e.data.label)
+                  getPlayerInfo(name)
+                })    
  
         arcs.append("svg:path")
                 .attr("fill", function(d, i) { return color(i); } ) 
@@ -283,7 +310,9 @@ function salaryDataSet(team_id){
                 d.innerRadius = 0;
                 d.outerRadius = r;
                 return "translate(" + arc.centroid(d) + ")";        
-            })
+            }) 
+            .attr("class", "player_label")
+            .attr("display", "none")
             .attr("text-anchor", "middle")                          
             .text(function(d, i) { return salary_data[i].label; });
             })

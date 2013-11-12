@@ -34,5 +34,14 @@ class PlayersController < ApplicationController
     end
   end
 
+  def individual_player_data
+    name = params[:name]
+    @player = Player.where("name = '#{name}'")
+    respond_to do |format|
+      format.html
+      format.json {render :json => @player}
+    end
+
+  end
 end
 
