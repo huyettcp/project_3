@@ -2,7 +2,7 @@ namespace :player_names_salaries_cost_effectiveness do
   desc "Generates player data"
   task :seed => :environment do
 
-  include Nokogiri
+ 
   require 'nokogiri'
   require 'open-uri'
 
