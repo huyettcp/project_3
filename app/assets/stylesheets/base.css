@@ -21,6 +21,8 @@
   #Forms
   #Misc */
 
+@import url(http://fonts.googleapis.com/css?family=Coustard|Carme);
+
 
 /* #Reset & Basics (Inspired by E. Meyers)
 ================================================== */
@@ -63,7 +65,7 @@
 ================================================== */
   h1, h2, h3, h4, h5, h6 {
     color: #181818;
-    font-family: "Georgia", "Times New Roman", serif;
+    font-family: "Coustard", serif;
     font-weight: normal; }
   h1 a, h2 a, h3 a, h4 a, h5 a, h6 a { font-weight: inherit; }
   h1 { font-size: 46px; line-height: 50px; margin-bottom: 14px;}

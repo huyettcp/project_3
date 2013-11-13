@@ -39,9 +39,9 @@
 
     //CSS for ddSlick
     ddslickCSS = '<style id="css-ddslick" type="text/css">' +
-                '.dd-select{ border-radius:2px; border:solid 1px #ccc; position:relative; cursor:pointer;}' +
+                '.dd-select{ border-radius:2px; border-right:solid 1px #ccc; position:relative; cursor:pointer; }' +
                 '.dd-desc { color:#aaa; display:block; overflow: hidden; font-weight:normal; line-height: 1.4em; }' +
-                '.dd-selected{ overflow:hidden; display:block; padding:10px; font-weight:bold;}' +
+                '.dd-selected{ overflow:hidden; display:block; padding:10px; font-weight:bold; }' +
                 '.dd-pointer{ width:0; height:0; position:absolute; right:10px; top:50%; margin-top:-3px;}' +
                 '.dd-pointer-down{ border:solid 5px transparent; border-top:solid 5px #000; }' +
                 '.dd-pointer-up{border:solid 5px transparent !important; border-bottom:solid 5px #000 !important; margin-top:-8px;}' +
@@ -51,8 +51,8 @@
                 '.dd-option:hover{ background:#f3f3f3; color:#000;}' +
                 '.dd-selected-description-truncated { text-overflow: ellipsis; white-space:nowrap; }' +
                 '.dd-option-selected { background:#f6f6f6; }' +
-                '.dd-option-image, .dd-selected-image { vertical-align:middle; float:left; margin-right:5px; max-width:64px; height:20px; width:20px;}' +
-                '.dd-image-right { float:right; margin-right:15px; margin-left:5px; height:20px; width:20px;}' +
+                '.dd-option-image, .dd-selected-image { vertical-align:middle; float:left; margin-right:10px; max-width:64px; height:20px; width:1px;}' +
+                '.dd-image-right { float:right; margin-right:15px; margin-left:10px; margin-top: 10px; height:20px; width:20px; }' +
                 '.dd-container{ position:relative;}​ .dd-selected-text { font-weight:bold}​</style>';
 
     //CSS styles are only added once.

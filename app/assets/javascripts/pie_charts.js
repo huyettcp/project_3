@@ -15,6 +15,7 @@ $(document).ready(function(){
   })
 
   $('#select_team').ddslick({
+    imagePosition:"right",
     onSelected: function(data){
       var team_id = data.selectedData.value
       salaryDataSet(team_id);
@@ -59,9 +60,9 @@ function onLoadSalaryDataSet(){
   }).done(function(player){
 
 
-    var w = 500,                
-    h = 500,                          
-    r = 250,                            
+    var w = 600,                
+    h = 600,                          
+    r = 300,                            
     color = d3.scale.category20c();      
  
     salary_data = [{"label":player[0].name, "value":player[0].salary * .00001}, 
@@ -142,9 +143,9 @@ function onLoadSalaryDataSet(){
   }).done(function(player){
     console.log(player[0].name)
 
-   var w = 500,                
-    h = 500,                          
-    r = 250,                           
+   var w = 600,                
+    h = 600,                          
+    r = 300,                           
     color = d3.scale.category20b(); 
 
     value_data = [{"label":player[0].name, "value":parseFloat(player[0].cost_performance_score) * .00001},
@@ -226,9 +227,9 @@ function salaryDataSet(team_id){
 
     console.log(player[1].name)
 
-    var w = 500,                
-    h = 500,                          
-    r = 250,                           //radius
+    var w = 600,                
+    h = 600,                          
+    r = 300,                           //radius
     color = d3.scale.category20c();     //builtin range of colors
  
     salary_data = [{"label":player[0].name, "value":player[0].salary * .00001}, 
