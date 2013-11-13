@@ -17,5 +17,29 @@
 
 #header {
   background-color: gray;
-  height: 50px;
+  height: 43px;
+
+}
+
+#header div {
+  display: inline-block;
+
+}
+
+#not_skeleton_buttons {
+ 
+  float: top;
+
+}
+
+#data1, #data2 {
+  background-color: rgb(238, 238, 238);
+  height: 41px;
+  border:solid 1px #ccc;
+  outline: 0;
+  padding: none;
+  border-radius:1px;
+  box-shadow:0px;
+  cursor:pointer;
+
 }

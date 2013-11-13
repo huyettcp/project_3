@@ -1,27 +1,39 @@
-console.log("sup")
-
 $(document).ready(function(){
   onLoadSalaryDataSet();
+
+
   
-  $( '#team' ).on( 'change', function(){
-    var team_id = $( '#team' ).val()
-    salaryDataSet(team_id);
-  })
 
   $( '#data2' ).click(function(){
-    var team_id = $( '#team' ).val()
+    var team_id = $( '#select_team' ).data().ddslick.selectedData.value
     costPerformanceScoreDataSet(team_id);
   })
 
   $( '#data1' ).click(function(){
-    var team_id = $( '#team' ).val()
+    var team_id = $( '#select_team' ).data().ddslick.selectedData.value
     salaryDataSet(team_id);
   })
+
+  $('#select_team').ddslick({
+    onSelected: function(data){
+      var team_id = data.selectedData.value
+      salaryDataSet(team_id);
+
+      // console.log(team_id)
+    }
+  })
+
+  // $('#select_data_type').ddslick({
+  //   onSelected: function(data){
+  //     var team_id = $( '#select_team' ).data().ddslick.selectedData.value
+  //     costPerformanceScoreDataSet(team_id);
+  //   }
+  // })
 
 
 })
 
-// console.log($( '#team option:selected' ).text())
+
 
 function getPlayerInfo(name){
   $.ajax({
