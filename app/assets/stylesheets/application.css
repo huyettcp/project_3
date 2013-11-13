@@ -14,7 +14,9 @@
  *= require skeleton
  *= require_tree .
  */
-
+.clearfix{
+  clear: both;
+}
 #header {
   background-color: gray;
   height: 43px;
@@ -26,20 +28,37 @@
 
 }
 
-#not_skeleton_buttons {
- 
-  float: top;
-
+#player_data {
+  float: right;
 }
 
+#select_team{
+  float: left;
+}
 #data1, #data2 {
   background-color: rgb(238, 238, 238);
-  height: 41px;
+  height: 43px;
   border:solid 1px #ccc;
   outline: 0;
   padding: none;
   border-radius:1px;
   box-shadow:0px;
   cursor:pointer;
+  float: left;
+  margin-left: 0px;
+
+}
+#data2  {
+  margin-left: -3px;
+}
+
+#player_name {
+  font-weight: bold;
+}
+
+.columns {
+  padding-top: 30px;
+}
+svg {
 
 }
