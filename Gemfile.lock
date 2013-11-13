@@ -152,6 +152,7 @@ DEPENDENCIES
   d3-rails
   database_cleaner
   jquery-rails
+  nokogiri
   pg
   rails (= 3.2.13)
   rspec-rails (~> 2.0)

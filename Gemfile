@@ -35,6 +35,9 @@ group :test do
 
 end
 
+
+gem 'nokogiri'
+
 gem "d3-rails"
 
 gem 'underscore-rails'
