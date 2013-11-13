@@ -47,10 +47,10 @@ test:
   username: christopherhuyett
   host: localhost
 
-# production:
-#   adapter: postgresql
-#   encoding: unicode
-#   database: project_3_production
-#   pool: 5
-#   username: project_3
-#   password:
+production:
+  adapter: postgresql
+  encoding: unicode
+  database: project_3_production
+  database: christopherhuyett
+  pool: 5
+  host: localhost
