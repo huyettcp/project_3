@@ -33,6 +33,7 @@
 <select id="team">
   <option value="349">Boston Red Sox</option>
   <option value="354">Los Angeles Angels of Anaheim</option>
+  <option value="347">New York Yankees</option>
 </select>
 
 <script type="text/javascript">
@@ -63,7 +64,7 @@ function getPlayerInfo(name){
     method: 'GET',
     dataType: 'json'
   }).done(function(name){
-    console.log(name[0].salary)
+
     $( '#salary_data' ).text("2013 Salary: " + "$" + name[0].salary)
     $( '#cost_performance_score' ).text("2013 Cost vs. Performance Score: " + name[0].cost_performance_score)
   })
@@ -103,7 +104,7 @@ function onLoadSalaryDataSet(){
             {"label":player[17].name, "value":player[17].salary * .00001},
             {"label":player[18].name, "value":player[18].salary * .00001},
             {"label":player[19].name, "value":player[19].salary * .00001},
-            {"label":player[20].name, "value":player[20].salary * .00001},
+            {"label":player[20].name, "value":player[20].salary * .00001}
             ];
     
     var vis = d3.select("body")
@@ -129,7 +130,7 @@ function onLoadSalaryDataSet(){
                   // console.log(e.data.label)
                   var name = e.data.label
                   $( '#player_name' ).text(e.data.label)
-                  // getPlayerInfo(player_name)
+                  getPlayerInfo(name)
                 })    
  
         arcs.append("svg:path")
@@ -164,7 +165,7 @@ function onLoadSalaryDataSet(){
     var w = 600,                        
         h = 600,                          
         r = 300,                            
-    color = d3.scale.category20c(); 
+    color = d3.scale.category20b(); 
 
     value_data = [{"label":player[0].name, "value":parseFloat(player[0].cost_performance_score) * .00001},
                   {"label":player[1].name, "value":parseFloat(player[1].cost_performance_score) * .00001},
@@ -211,9 +212,9 @@ function onLoadSalaryDataSet(){
                 .on("mouseover", function(e, i){
                   // console.log(e, i)
                   // console.log(e.data.label)
-                  var player_name = e.data.label
+                  var name = e.data.label
                   $( '#player_name' ).text(e.data.label)
-                  // getPlayerInfo(player_name)
+                  getPlayerInfo(name)
                 })     
  
         arcs.append("svg:path")
