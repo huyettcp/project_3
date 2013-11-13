@@ -13,9 +13,9 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
-//= require tasks.js
+//= require tasks
 //= require d3
 //= require underscore
-
+//= require pie_charts
 
 

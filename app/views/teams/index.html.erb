@@ -23,36 +23,7 @@
     </div>
 
 
-<style type="text/css">
- div.bar {
- display: inline-block;
- width: 20px;
- height: 75px; /* We'll override height later */
- background-color: teal;
- margin-right: 2px;
-}
-        .container { max-width: 90em; }
 
-                /* you only need width to set up columns; all columns are 100%-width by default, so we start
-                   from a one-column mobile layout and gradually improve it according to available screen space */
-
-                @media only screen and (min-width: 34em) {
-                        .feature, .info { width: 50%; }
-                }
-
-                @media only screen and (min-width: 54em) {
-                        .content { width: 66.66%; }
-                        .sidebar { width: 33.33%; }
-                        .info    { width: 100%;   }
-                }
-
-                @media only screen and (min-width: 76em) {
-                        .content { width: 58.33%; } /* 7/12 */
-                        .sidebar { width: 41.66%; } /* 5/12 */
-                        .info    { width: 50%;    }
-                }
-
-</style>
 
 <script>
 $(function(){
@@ -84,7 +55,7 @@ $(function(){
     })
 
     // sorted_team_payrolls = team_payrolls.sort(d3.descending);
-    
+ 
 
     console.log(team_payrolls);
     svg.selectAll("rect")
@@ -103,7 +74,8 @@ $(function(){
       // })
       .attr("width", w / team_payrolls.length - barPadding)
       .attr("height", function(d) {
-        return d * .000001; // <-- Times four!
+        return d * .000001;
+        
       })
 
 

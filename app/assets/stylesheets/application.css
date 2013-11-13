@@ -14,3 +14,8 @@
  *= require skeleton
  *= require_tree .
  */
+
+#header {
+  background-color: gray;
+  height: 50px;
+}
