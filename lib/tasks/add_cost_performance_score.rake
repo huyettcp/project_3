@@ -5,7 +5,7 @@ namespace :add_cost_performance_score do
   require 'nokogiri'
   require 'open-uri'
 
-  n = Nokogiri::HTML(open("http://baseballplayersalaries.com/teams/13_Seattle_Mariners"))
+  n = Nokogiri::HTML(open("http://baseballplayersalaries.com/teams/27_Colorado_Rockies"))
   noko = 0
   player_name = nil
 
