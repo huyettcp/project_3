@@ -1,7 +1,7 @@
 class PlayersController < ApplicationController
   def index 
     
-    @players = Player.where("team_id = 3").order("salary DESC") 
+    @players = Player.where("team_id = 16").order("salary DESC") 
     respond_to do |format|
       format.html
       format.json {render :json => @players}
