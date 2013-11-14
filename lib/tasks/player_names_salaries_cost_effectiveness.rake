@@ -8,7 +8,7 @@ namespace :player_names_salaries_cost_effectiveness do
 
 
 
-  n = Nokogiri::HTML(open("http://baseballplayersalaries.com/teams/7_Detroit_Tigers"))
+  n = Nokogiri::HTML(open("http://baseballplayersalaries.com/teams/25_San_Francisco_Giants"))
   noko = 0
   player_name = nil
 
