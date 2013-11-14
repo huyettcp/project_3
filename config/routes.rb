@@ -1,5 +1,5 @@
 Project3::Application.routes.draw do
-  root :to => 'teams#index'
+  root :to => 'players#index'
   get '/teams', to: 'teams#index'
   
   get '/players', to: 'players#index'
