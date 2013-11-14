@@ -46,7 +46,7 @@ function getPlayerInfo(name){
     dataType: 'json'
   }).done(function(name){
 
-    $( '#salary_data' ).text("2013 Salary: " + "$" + name[0].salary)
+    $( '#salary_data' ).text("2013 Salary: " + "$" + name[0].salary.toLocaleString())
     $( '#cost_performance_score' ).text("2013 Cost vs. Performance Score: " + name[0].cost_performance_score)
   })
  
