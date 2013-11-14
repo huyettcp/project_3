@@ -14,6 +14,15 @@
  *= require skeleton
  *= require_tree .
  */
+
+ .columns {
+  padding-top: 60px;
+}
+
+#cost_performance_score_description {
+  size:9px;
+}
+
 #header {
   background-color: rgb(238, 238, 238);
   height: 43px;
