@@ -18,6 +18,7 @@ namespace :add_cost_performance_score do
 
     player = Player.find_by_name(player_name)
     player.update_attribute :cost_performance_score, cost_performance_score
+ 
   end
 end
 end

@@ -20,16 +20,9 @@ $(document).ready(function(){
       var team_id = data.selectedData.value
       salaryDataSet(team_id);
 
-      // console.log(team_id)
+
     }
   })
-
-  // $('#select_data_type').ddslick({
-  //   onSelected: function(data){
-  //     var team_id = $( '#select_team' ).data().ddslick.selectedData.value
-  //     costPerformanceScoreDataSet(team_id);
-  //   }
-  // })
 
 
 
@@ -63,9 +56,11 @@ function onLoadSalaryDataSet(){
     var w = 600,                
     h = 600,                          
     r = 300,                            
-    color = d3.scale.category20c();      
+    color = d3.scale.category20c(); 
+
+    for(i = 0; i < 21; i++){     
  
-    salary_data = [{"label":player[0].name, "value":player[0].salary * .00001}, 
+    salary_data = [{"label":player[i].name, "value":player[0].salary * .00001}, 
             {"label":player[1].name, "value":player[1].salary * .00001},  
             {"label":player[2].name, "value":player[2].salary * .00001}, 
             {"label":player[3].name, "value":player[3].salary * .00001},

@@ -24,7 +24,6 @@ namespace :player_names_salaries_cost_effectiveness do
     player = Player.create(name: player_name, salary: player_salary, team_id: team_id.id)
   end
 end
-
 end
 
 

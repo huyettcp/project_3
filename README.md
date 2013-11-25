@@ -1,6 +1,8 @@
-project_3
+SaberGraphs
 =========
 
-Baseball data visualization
+D3.js visualization of the MLB payrolls, player salaries, and player cost-effectiveness.
+
+
 
 http://whispering-temple-2020.herokuapp.com/
