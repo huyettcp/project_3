@@ -15,7 +15,7 @@
  *= require_tree .
  */
 
- .columns {
+.columns {
   padding-top: 60px;
 }
 
@@ -47,10 +47,8 @@
 #data1, #data2 {
   background-color: rgb(238, 238, 238);
   height: 43px;
-  /*border:solid 1px #ccc;*/
   outline: 0;
   padding: none;
- /* border-radius:1px;*/
   box-shadow:0px;
   cursor:pointer;
   float: left;

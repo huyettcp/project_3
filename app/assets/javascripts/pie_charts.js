@@ -1,8 +1,6 @@
 $(document).ready(function(){
-  onLoadSalaryDataSet();
-
-
   
+  onLoadSalaryDataSet();
 
   $( '#data2' ).click(function(){
     var team_id = $( '#select_team' ).data().ddslick.selectedData.value
@@ -19,17 +17,10 @@ $(document).ready(function(){
     onSelected: function(data){
       var team_id = data.selectedData.value
       salaryDataSet(team_id);
-
-
     }
   })
 
-
-
-
 })
-
-
 
 function getPlayerInfo(name){
   $.ajax({
@@ -38,11 +29,10 @@ function getPlayerInfo(name){
     method: 'GET',
     dataType: 'json'
   }).done(function(name){
-
     $( '#salary_data' ).text("2013 Salary: " + "$" + name[0].salary.toLocaleString())
     $( '#cost_performance_score' ).text("2013 Cost vs. Performance Score*: " + name[0].cost_performance_score)
   })
- 
+
 }
 
 function onLoadSalaryDataSet(){
@@ -52,36 +42,32 @@ function onLoadSalaryDataSet(){
     dataType: 'json'
   }).done(function(player){
 
-
-    var w = 600,                
-    h = 600,                          
-    r = 300,                            
-    color = d3.scale.category20c(); 
-
-    for(i = 0; i < 21; i++){     
+  var w = 600,                
+      h = 600,                          
+      r = 300,                            
+      color = d3.scale.category20c(); 
+  
  
-    salary_data = [{"label":player[i].name, "value":player[0].salary * .00001}, 
-            {"label":player[1].name, "value":player[1].salary * .00001},  
-            {"label":player[2].name, "value":player[2].salary * .00001}, 
-            {"label":player[3].name, "value":player[3].salary * .00001},
-            {"label":player[4].name, "value":player[4].salary * .00001},
-            {"label":player[5].name, "value":player[5].salary * .00001},
-            {"label":player[6].name, "value":player[6].salary * .00001},
-            {"label":player[7].name, "value":player[7].salary * .00001},
-            {"label":player[8].name, "value":player[8].salary * .00001},
-            {"label":player[9].name, "value":player[9].salary * .00001},
-            {"label":player[10].name, "value":player[10].salary * .00001},
-            {"label":player[11].name, "value":player[11].salary * .00001},
-            {"label":player[12].name, "value":player[12].salary * .00001},
-            {"label":player[13].name, "value":player[13].salary * .00001},
-            {"label":player[14].name, "value":player[14].salary * .00001},
-            {"label":player[15].name, "value":player[15].salary * .00001},
-            {"label":player[16].name, "value":player[16].salary * .00001},
-            {"label":player[17].name, "value":player[17].salary * .00001},
-            {"label":player[18].name, "value":player[18].salary * .00001},
-            {"label":player[19].name, "value":player[19].salary * .00001}
-            
-            ];
+  salary_data = [{"label":player[0].name, "value":player[0].salary * .00001}, 
+                {"label":player[1].name, "value":player[1].salary * .00001},  
+                {"label":player[2].name, "value":player[2].salary * .00001}, 
+                {"label":player[3].name, "value":player[3].salary * .00001},
+                {"label":player[4].name, "value":player[4].salary * .00001},
+                {"label":player[5].name, "value":player[5].salary * .00001},
+                {"label":player[6].name, "value":player[6].salary * .00001},
+                {"label":player[7].name, "value":player[7].salary * .00001},
+                {"label":player[8].name, "value":player[8].salary * .00001},
+                {"label":player[9].name, "value":player[9].salary * .00001},
+                {"label":player[10].name, "value":player[10].salary * .00001},
+                {"label":player[11].name, "value":player[11].salary * .00001},
+                {"label":player[12].name, "value":player[12].salary * .00001},
+                {"label":player[13].name, "value":player[13].salary * .00001},
+                {"label":player[14].name, "value":player[14].salary * .00001},
+                {"label":player[15].name, "value":player[15].salary * .00001},
+                {"label":player[16].name, "value":player[16].salary * .00001},
+                {"label":player[17].name, "value":player[17].salary * .00001},
+                {"label":player[18].name, "value":player[18].salary * .00001},
+                {"label":player[19].name, "value":player[19].salary * .00001}];
     
     var vis = d3.select("#pie_area")
         .append("svg")              
@@ -129,7 +115,7 @@ function onLoadSalaryDataSet(){
  }
 
 
- function costPerformanceScoreDataSet(team_id){
+function costPerformanceScoreDataSet(team_id){
    $.ajax({
     url: '/cost_performance_data',
     data: {team_id: team_id},
@@ -228,27 +214,25 @@ function salaryDataSet(team_id){
     color = d3.scale.category20c();     //builtin range of colors
  
     salary_data = [{"label":player[0].name, "value":player[0].salary * .00001}, 
-            {"label":player[1].name, "value":player[1].salary * .00001},  
-            {"label":player[2].name, "value":player[2].salary * .00001}, 
-            {"label":player[3].name, "value":player[3].salary * .00001},
-            {"label":player[4].name, "value":player[4].salary * .00001},
-            {"label":player[5].name, "value":player[5].salary * .00001},
-            {"label":player[6].name, "value":player[6].salary * .00001},
-            {"label":player[7].name, "value":player[7].salary * .00001},
-            {"label":player[8].name, "value":player[8].salary * .00001},
-            {"label":player[9].name, "value":player[9].salary * .00001},
-            {"label":player[10].name, "value":player[10].salary * .00001},
-            {"label":player[11].name, "value":player[11].salary * .00001},
-            {"label":player[12].name, "value":player[12].salary * .00001},
-            {"label":player[13].name, "value":player[13].salary * .00001},
-            {"label":player[14].name, "value":player[14].salary * .00001},
-            {"label":player[15].name, "value":player[15].salary * .00001},
-            {"label":player[16].name, "value":player[16].salary * .00001},
-            {"label":player[17].name, "value":player[17].salary * .00001},
-            {"label":player[18].name, "value":player[18].salary * .00001},
-            {"label":player[19].name, "value":player[19].salary * .00001}
-
-            ];
+                  {"label":player[1].name, "value":player[1].salary * .00001},  
+                  {"label":player[2].name, "value":player[2].salary * .00001}, 
+                  {"label":player[3].name, "value":player[3].salary * .00001},
+                  {"label":player[4].name, "value":player[4].salary * .00001},
+                  {"label":player[5].name, "value":player[5].salary * .00001},
+                  {"label":player[6].name, "value":player[6].salary * .00001},
+                  {"label":player[7].name, "value":player[7].salary * .00001},
+                  {"label":player[8].name, "value":player[8].salary * .00001},
+                  {"label":player[9].name, "value":player[9].salary * .00001},
+                  {"label":player[10].name, "value":player[10].salary * .00001},
+                  {"label":player[11].name, "value":player[11].salary * .00001},
+                  {"label":player[12].name, "value":player[12].salary * .00001},
+                  {"label":player[13].name, "value":player[13].salary * .00001},
+                  {"label":player[14].name, "value":player[14].salary * .00001},
+                  {"label":player[15].name, "value":player[15].salary * .00001},
+                  {"label":player[16].name, "value":player[16].salary * .00001},
+                  {"label":player[17].name, "value":player[17].salary * .00001},
+                  {"label":player[18].name, "value":player[18].salary * .00001},
+                  {"label":player[19].name, "value":player[19].salary * .00001}];
 
 
     var vis = d3.select("svg")
