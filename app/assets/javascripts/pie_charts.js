@@ -88,8 +88,7 @@ function onLoadSalaryDataSet(){
             .append("svg:g")               
                 .attr("class", "slice")
                 .on("mouseover", function(e, i){
-                  // console.log(e, i)
-                  // console.log(e.data.label)
+    
                   var name = e.data.label
                   $( '#player_name' ).text(e.data.label)
                   getPlayerInfo(name)
@@ -122,7 +121,7 @@ function costPerformanceScoreDataSet(team_id){
     method: 'GET',
     dataType: 'json'
   }).done(function(player){
-    console.log(player[0].name)
+
 
    var w = 600,                
     h = 600,                          
@@ -171,8 +170,7 @@ function costPerformanceScoreDataSet(team_id){
             .append("svg:g")               
                 .attr("class", "slice")
                 .on("mouseover", function(e, i){
-                  // console.log(e, i)
-                  // console.log(e.data.label)
+            
                   var name = e.data.label
                   $( '#player_name' ).text(e.data.label)
                   getPlayerInfo(name)
@@ -206,7 +204,6 @@ function salaryDataSet(team_id){
     dataType: 'json'
   }).done(function(player){
 
-    console.log(player[1].name)
 
     var w = 600,                
     h = 600,                          
@@ -254,8 +251,6 @@ function salaryDataSet(team_id){
             .append("svg:g")               
                 .attr("class", "slice")
                 .on("mouseover", function(e, i){
-                  // console.log(e, i)
-                  // console.log(e.data.label)
                   var name = e.data.label
                   $( '#player_name' ).text(e.data.label)
                   getPlayerInfo(name)
